@@ -1,0 +1,92 @@
+<div *ngIf="cargando" class="text-center py-5">
+  <div class="spinner-border text-primary" role="status"></div>
+  <p class="mt-2 mb-0 text-muted">Cargando...</p>
+</div>
+
+<div *ngIf="error" class="alert alert-danger" role="alert">
+  <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ error }}
+  <button class="btn btn-sm btn-outline-danger ms-3" (click)="volver()">Volver</button>
+</div>
+
+<div class="row justify-content-center" *ngIf="estudiante">
+  <div class="col-md-8 col-lg-6">
+    <div class="card shadow border-0">
+      <div class="card-header bg-primary text-white text-center py-3">
+        <h4 class="mb-0">
+          <i class="bi bi-person-badge-fill me-2"></i>Detalle del Estudiante
+        </h4>
+      </div>
+
+      <div class="card-body p-4">
+        <h5 class="text-center text-primary mb-4">{{ estudiante.nombre }}</h5>
+
+        <div class="row text-center mb-4">
+          <div class="col">
+            <div class="border rounded p-3 bg-light">
+              <small class="text-muted d-block">Nota 1</small>
+              <span class="fs-4 fw-bold">{{ estudiante.nota1 }}</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="border rounded p-3 bg-light">
+              <small class="text-muted d-block">Nota 2</small>
+              <span class="fs-4 fw-bold">{{ estudiante.nota2 }}</span>
+            </div>
+          </div>
+          <div class="col">
+            <div class="border rounded p-3 bg-light">
+              <small class="text-muted d-block">Nota 3</small>
+              <span class="fs-4 fw-bold">{{ estudiante.nota3 }}</span>
+            </div>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="row text-center mb-4">
+          <div class="col">
+            <small class="text-muted d-block">Suma de notas</small>
+            <span class="fs-4 fw-bold text-secondary">{{ suma }}</span>
+          </div>
+          <div class="col">
+            <small class="text-muted d-block">Promedio</small>
+            <span class="fs-4 fw-bold text-primary">{{ promedio | number:'1.2-2' }}</span>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="row text-center">
+          <div class="col">
+            <small class="text-muted d-block mb-2">Estado académico</small>
+            <span class="badge fs-6 px-3 py-2" [ngClass]="estado === 'Aprobado' ? 'bg-success' : 'bg-danger'">
+              <i class="bi me-1" [ngClass]="estado === 'Aprobado' ? 'bi-check-circle-fill' : 'bi-x-circle-fill'"></i>
+              {{ estado }}
+            </span>
+          </div>
+          <div class="col">
+            <small class="text-muted d-block mb-2">Observación</small>
+            <span class="badge fs-6 px-3 py-2" [ngClass]="{
+                    'bg-success': observacion === 'Excelente',
+                    'bg-warning text-dark': observacion === 'Regular',
+                    'bg-danger': observacion === 'En Riesgo'
+                  }">
+              <i class="bi me-1" [ngClass]="{
+                   'bi-star-fill': observacion === 'Excelente',
+                   'bi-dash-circle-fill': observacion === 'Regular',
+                   'bi-exclamation-triangle-fill': observacion === 'En Riesgo'
+                 }"></i>
+              {{ observacion }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer bg-white text-center py-3">
+        <button class="btn btn-outline-primary" (click)="volver()">
+          <i class="bi bi-arrow-left me-1"></i>Volver a la lista
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
